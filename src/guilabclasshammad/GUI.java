@@ -5,6 +5,8 @@
  */
 package guilabclasshammad;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.proteanit.sql.DbUtils;
 /**
  *
@@ -284,13 +286,22 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
       
-        
-        TRANSACT s=new TRANSACT();
+         TRANSACT s=new TRANSACT();
+       
         TransactionDAO dao=new TransactionDAO();
           s.id=Integer.parseInt(txtid.getText());
           ResultSet rs=dao.selectbyid(s);
-          table.setModel(DbUtils.resultSetToTableModel(rs));
-       
+        // table.setModel(DbUtils.resultSetToTableModel(rs));
+          try {
+              while (rs.next()) {
+                txtdate.setText(rs.getString(1) + "");
+                txtamt.setText(rs.getString(2));
+               txtacc.setText(rs.getString(3) + "");
+
+            }
+        } catch (SQLException ex) {     
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
      
     }//GEN-LAST:event_jButton7ActionPerformed
 
