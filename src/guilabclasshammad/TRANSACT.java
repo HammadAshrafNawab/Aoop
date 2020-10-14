@@ -9,13 +9,12 @@ package guilabclasshammad;
  *
  * @author student
  */
-public class GUILABCLASSHAMMAD {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-     
-    }
+public class TRANSACT {
+    int id;
+    String date;
+    int amt;
+    int acc;
+   // String served;
+   // String type;
     
 }
