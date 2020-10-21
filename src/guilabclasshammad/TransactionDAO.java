@@ -18,7 +18,7 @@ public class TransactionDAO {
     void Connection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-      String url="jdbc:mysql://localhost:3306/db";
+            String url = "jdbc:mysql://localhost:3306/db";
             con = DriverManager.getConnection(url, "root", "");
         } catch (Exception ex) {
             System.out.println(ex.toString());
@@ -33,10 +33,10 @@ public class TransactionDAO {
             PreparedStatement pst = con.prepareStatement(qry);
             pst.setInt(1, s.id);
             pst.setString(2, s.date);
-          
+
             pst.setInt(3, s.amt);
             pst.setInt(4, s.acc);
-            
+
             res = pst.executeUpdate();
 
         } catch (Exception ex) {
@@ -52,8 +52,8 @@ public class TransactionDAO {
             String qry = "update  transaction set date=?,amt=?,date=? where id=?";
             PreparedStatement pst = con.prepareStatement(qry);
             pst.setInt(4, s.id);
-            pst.setString(3,s.date);
-          //  pst.setString(3, s.type);
+            pst.setString(3, s.date);
+            //  pst.setString(3, s.type);
             pst.setInt(2, s.amt);
             pst.setInt(1, s.acc);
             //pst.setString(6, s.served);
@@ -84,27 +84,43 @@ public class TransactionDAO {
     ResultSet selectall() {
         ResultSet rs = null;
         try {
-       Connection();
-        String qry = "select * from transaction";
-           Statement st = con.createStatement();
-           rs=st.executeQuery(qry);
-             
+            Connection();
+            String qry = "select * from transaction";
+            Statement st = con.createStatement();
+            rs = st.executeQuery(qry);
+
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
         return rs;
 
     }
-     ResultSet selectbyid(TRANSACT s) {
+
+    ResultSet selectbyid(TRANSACT s) {
         ResultSet rs = null;
         try {
-       Connection();
-        String qry = "select * from transaction where id=?";
+            Connection();
+            String qry = "select * from transaction where id=?";
             PreparedStatement pst = con.prepareStatement(qry);
             pst.setInt(1, s.id);
-           rs=pst.executeQuery();
-           
-             
+            rs = pst.executeQuery();
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+
+    }
+
+    ResultSet combo() {
+        ResultSet rs = null;
+        try {
+            Connection();
+            String qry = "select * from transaction ";
+            Statement pst = con.createStatement();
+
+            rs = pst.executeQuery(qry);
+
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
